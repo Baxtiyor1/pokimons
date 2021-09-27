@@ -1,0 +1,97 @@
+main{
+    background-color: #FFD845;
+    min-height: 80vh;
+}
+.form{
+    margin: 0 auto 100px;
+    max-width: 1175px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__select{
+        width: 260px;
+        padding: 15px;
+    }
+    &__search{
+        padding: 16px 30px;
+        width: 300px;
+    }
+    &__input{
+        outline: none;
+        border: none;
+        height: 60px;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        background: #FFFFFF;
+        border: 2px solid #000000;
+        border-radius: 15px;
+    }
+    &__btn{
+        width: 200px;
+        cursor: pointer;
+    }
+}
+
+.pakimon{
+    &__card{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    &__item{
+        width: 307px;
+        height: 423px;
+        margin-bottom: 30px;
+        border: 2px solid #000000;
+        background-color: #fff;
+        border-radius: 20px;
+        position: relative;
+    }
+    &__img{
+        margin: 30px 75px 68px;
+    }
+    &__hr{
+        border: 1px solid #000;
+    }
+    &__heart{
+        width: 30px;
+        height: 30px;
+        &:hover{
+            fill: red;
+        }
+    }
+    &__btn{
+        position: absolute;
+        right: 30px;
+        bottom: 115px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+    }
+    &__title{
+        margin: 20px 0 5px 30px;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+    }
+    &__ability{
+        margin: 0 0 25px 30px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+    }
+    &__weidth{
+        margin: 0 30px;
+        display: inline-block;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+    }
+    &__age{
+        display: inline-block;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+    }
+}
