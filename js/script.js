@@ -47,7 +47,7 @@ function renderFile(Arr, element, sidebar){
             let findpokemon = Arr.find(pokemon => pokemon.id == cardBtn.dataset.pokemon_id)
             
             if(!modalArr.includes(findpokemon)){
-                
+                let modalLi = getElem('.pakimon__item', modalTemplate)
                 getElem('.pakimon__img', modalTemplate).src = findpokemon.img
                 getElem('.pakimon__title', modalTemplate).textContent = findpokemon.name
                 getElem('.pakimon__ability', modalTemplate).textContent = findpokemon.type
@@ -56,6 +56,9 @@ function renderFile(Arr, element, sidebar){
                 let modalBtn = getElem('.pakimon__btn', modalTemplate)
                 modalBtn.dataset.modalPokemon_id = findpokemon.id
 
+                modalBtn.addEventListener('click', ()=>{
+                    modalLi.classList.add('modal__btn--close')
+                })
                 sidebar.appendChild(modalTemplate)
                 
                 modalArr.push(findpokemon)

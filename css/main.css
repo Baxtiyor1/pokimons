@@ -277,6 +277,10 @@ main {
           box-shadow: 0 0 2px 2px #fff;
 }
 
+.modal__btn--close {
+  display: none;
+}
+
 .modal__card {
   display: -webkit-box;
   display: -ms-flexbox;
