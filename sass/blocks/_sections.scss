@@ -32,7 +32,14 @@ main{
         cursor: pointer;
     }
 }
-
+@media screen and (max-width: 560px) {
+    .form{
+        &__input{
+            width: 300px;
+            margin-bottom: 15px;
+        }
+    }
+}
 .pakimon{
     &__card{
         display: flex;
