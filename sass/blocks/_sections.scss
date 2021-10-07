@@ -55,18 +55,14 @@ main{
         border-radius: 20px;
         position: relative;
     }
+    &__item--active{
+        display: inline-block;
+    }
     &__img{
         margin: 30px 75px 68px;
     }
     &__hr{
         border: 1px solid #000;
-    }
-    &__heart{
-        width: 30px;
-        height: 30px;
-        &:hover{
-            fill: red;
-        }
     }
     &__btn{
         position: absolute;
@@ -75,6 +71,11 @@ main{
         cursor: pointer;
         background-color: transparent;
         border: none;
+        &--active{
+            &::before{
+                color: red;
+            }
+        }
     }
     &__title{
         margin: 20px 0 5px 30px;

@@ -4,78 +4,71 @@ const elSelect = getElem('#select');
 const elfilter = getElem('#filter');
 const elInput = getElem('#input');
 const elTemplate = getElem('#template').content
-const elModalTemplate = getElem('#modal__template').content
 
 //modal
 
 const headerBtn = getElem('.header__btn');
 const elModal = getElem('.modal');
-const elCloseBtn = getElem('.modal__btn')
+const elModalBtn = getElem('.modal__btn')
 
-headerBtn.addEventListener('click', ()=>{
-    elModal.classList.add('modal__active')
-})
-elCloseBtn.addEventListener('click', ()=>{
+elModalBtn.addEventListener('click', ()=>{
     elModal.classList.remove('modal__active')
 })
-
-
-
 
 let modal__card = getElem('.modal__card')
 let modalArr = []
 
-function renderFile(Arr, element, sidebar){
-    elCard.innerHTML = null
+
+headerBtn.addEventListener('click', ()=>{
+    elModal.classList.add('modal__active')
+})
+
+let modalCardBtn = modal__card.querySelectorAll('.pakimon__btn')
+function renderFile(Arr, element){
+    element.innerHTML = null;
     
     Arr.forEach(pokemon =>{
         const cloneTemplate = elTemplate.cloneNode(true);
-        const modalTemplate = elModalTemplate.cloneNode(true);
         
         getElem('.pakimon__img', cloneTemplate).src = pokemon.img
         getElem('.pakimon__title', cloneTemplate).textContent = pokemon.name
         getElem('.pakimon__ability', cloneTemplate).textContent = pokemon.type
         getElem('.pakimon__weidth', cloneTemplate).textContent = pokemon.weight
         getElem('.pakimon__age', cloneTemplate).textContent = pokemon.avg_spawns + ' age'
-        let cardBtn = getElem('.pakimon__btn', cloneTemplate)
-        cardBtn.dataset.pokemon_id = pokemon.id
+        let cardBtn = getElem('.pakimon__btn', cloneTemplate);
+        cardBtn.dataset.pokemon_id = pokemon.id;
         
-        element.appendChild(cloneTemplate)
         
-        cardBtn.addEventListener('click', (evt)=>{
-            cardBtn.classList.toggle('icon__active')
-            let findpokemon = Arr.find(pokemon => pokemon.id == cardBtn.dataset.pokemon_id)
+        cardBtn.addEventListener('click', (e) =>{
+            cardBtn.classList.toggle('pakimon__btn--active')
+            let itemId = e.target.dataset.pokemon_id
             
-            if(!modalArr.includes(findpokemon)){
-                let modalLi = getElem('.pakimon__item', modalTemplate)
-                getElem('.pakimon__img', modalTemplate).src = findpokemon.img
-                getElem('.pakimon__title', modalTemplate).textContent = findpokemon.name
-                getElem('.pakimon__ability', modalTemplate).textContent = findpokemon.type
-                getElem('.pakimon__weidth', modalTemplate).textContent = findpokemon.weight
-                getElem('.pakimon__age', modalTemplate).textContent = findpokemon.avg_spawns + ' age'
-                let modalBtn = getElem('.pakimon__btn', modalTemplate)
-                modalBtn.dataset.modalPokemon_id = findpokemon.id
-
-                modalBtn.addEventListener('click', ()=>{
-                    modalLi.classList.add('modal__btn--close')
-                })
-                sidebar.appendChild(modalTemplate)
-                
-                modalArr.push(findpokemon)
+            let findPokemon = pokemons.find((pokemon) => pokemon.id == itemId)
+            let findIndex = modalArr.findIndex((pokemon) => pokemon.id == itemId)
+            
+            if(!modalArr.includes(findPokemon)){
+                modalArr.push(findPokemon)
             }else{
-                // let result = modalArr.find(param => param.id == cardBtn.dataset.pokemon_id)
-                // let removePokimon = modalArr.splice(findpokemon.id - 1, 1)
-                // console.log(removePokimon)
-                
-                console.log(sidebar.appendChild(modalTemplate))
+                modalArr.splice(findIndex, 1)
             }
-            console.log(modalArr)
+            
+            renderFile(modalArr, modal__card)
+
+            modalCardBtn.forEach(item =>{
+                item.addEventListener('click', (e) =>{
+                    let modCardBtn = e.target.dataset.pokemon_id;
+
+                    let findModalEl = pokemons.find(item => item.id == modCardBtn)
+
+                    findModalEl.cardBtn.classList.remove('pakimon__btn--active')
+                })
+            })
         })
         
+        element.appendChild(cloneTemplate)
     })
-    modalArr.forEach(item => sidebar.appendChild(item))
 }
-renderFile(pokemons, elCard, modal__card)
+renderFile(pokemons, elCard)
 
 
 function renderNames(Arr, element){
